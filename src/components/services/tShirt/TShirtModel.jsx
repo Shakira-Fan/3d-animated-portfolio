@@ -7,7 +7,6 @@ Source: https://sketchfab.com/3d-models/fish-t-shirt-b2bf0e93920f42618fb0255e137
 Title: fish t-shirt
 */
 
-import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function TShirtModel(props) {

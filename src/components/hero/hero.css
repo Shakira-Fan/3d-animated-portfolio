@@ -1,264 +1,139 @@
 .hero {
-  height: 100%;
+  min-height: 100svh;
+  display: grid;
+  align-items: end;
   overflow: hidden;
-  display: flex;
+  isolation: isolate;
 }
 
-.bg {
+.heroArtwork,
+.heroArtwork img,
+.heroShade,
+.heroScene {
   position: absolute;
+  inset: 0;
+}
+
+.heroArtwork {
+  z-index: -4;
+}
+
+.heroArtwork img {
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
+  object-fit: contain;
+  object-position: right center;
+  filter: saturate(1.08) contrast(1.08);
+}
+
+.heroScene {
+  z-index: -2;
+  opacity: 0.72;
+  mix-blend-mode: screen;
+}
+
+.heroShade {
   z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(8, 6, 7, 0.98) 0%, rgba(8, 6, 7, 0.78) 44%, rgba(8, 6, 7, 0.2) 100%),
+    linear-gradient(0deg, rgba(8, 6, 7, 0.96) 0%, rgba(8, 6, 7, 0.12) 58%);
 }
 
-.hImg {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  margin: auto;
-  height: 80%;
-  width: max-content;
-}
-
-.hImg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hSection {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.hTitle {
-  margin-top: 50px;
-  font-size: 100px;
-  color: pink;
-}
-
-.hTitle span {
-  color: white;
-}
-
-.awards {
-  width: 30%;
-}
-
-.awards p {
-  font-size: 14px;
-  color: #ddd;
-  margin: 16px 8px;
-}
-
-.awardList {
-  display: flex;
-  gap: 8px;
-}
-
-.awardList img {
-  width: 36px;
-  height: 36px;
-  padding: 8px;
-  background-color: white;
-  border-radius: 100%;
-}
-
-.scroll {
-  margin-bottom: 50px;
-  width: max-content;
-}
-
-.hSection.right {
+.heroInner {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 32px;
   align-items: end;
+  padding: 42px 0;
 }
 
-.follow {
+.heroCopy {
+  max-width: 840px;
+  display: grid;
+  gap: 22px;
+}
+
+.heroLead {
+  max-width: 640px;
+  color: #e3d8cb;
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.5;
+}
+
+.heroActions {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 12px;
-  padding: 16px;
-  background-color: #2f204e;
-  border-bottom-right-radius: 10px;
 }
 
-.follow img {
-  width: 20px;
-  height: 20px;
-}
-
-.followTextContainer {
-  width: 20px;
-  height: 20px;
-}
-
-.followText {
-  background-color: #dd4c62;
-  font-size: 12px;
-  rotate: 90deg;
-  width: max-content;
-  height: 100%;
-  transform-origin: left top;
-  transform: translateY(-20px);
-  padding: 0 8px;
-  display: flex;
-  align-items: center;
-  border-bottom-right-radius: 10px;
-}
-
-.bubbleContainer {
-  width: 50%;
-  display: flex;
-  align-items: end;
-  gap: 8px;
-  justify-content: space-between;
-}
-
-.bubble {
-  width: 100%;
-  height: 100px;
-  background-color: white;
-  color: #555;
-  padding: 24px;
-  font-size: 18px;
-  border-radius: 20px 20px 0px 20px;
-}
-
-.bubbleContainer img {
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  object-fit: cover;
-  background-color: #dd4c62;
-}
-
-.certificate {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-align: center;
-  line-height: 24px;
-  font-weight: 300;
-  color: #ddd;
-}
-
-.certificate img {
-  width: 70px;
-  height: 70px;
-}
-
-.circleText {
-  letter-spacing: 3px;
-  font-size: 20px;
-}
-
-.contactLink {
-  margin-bottom: 50px;
-}
-
-.contactButton {
-  position: relative;
-}
-
-.arrow {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 80px;
-  height: 80px;
-  display: flex;
+.heroActions a {
+  min-height: 46px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0 18px;
+  border: 1px solid var(--paper);
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 850;
+  text-transform: uppercase;
 }
 
-@media (max-width: 1536px) {
-  .hTitle {
-    font-size: 72px;
+.heroActions a + a {
+  background: transparent;
+  color: var(--paper);
+}
+
+.heroCard {
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: rgba(8, 6, 7, 0.74);
+  box-shadow: 10px 10px 0 rgba(255, 63, 142, 0.42);
+}
+
+.heroCard span {
+  color: var(--acid-green);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.heroCard strong {
+  display: block;
+  margin: 10px 0;
+  color: var(--hot-pink);
+  font-size: 48px;
+  line-height: 1;
+}
+
+.heroCard p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+    align-content: end;
+  }
+
+  .heroCard {
+    max-width: 360px;
   }
 }
 
-@media (max-width: 1280px) {
-  .bg {
-    height: 60%;
-    top: auto;
-    bottom: 0;
+@media (max-width: 620px) {
+  .heroInner {
+    padding: 28px 0;
   }
 
-  .hImg {
-    height: 100%;
+  .heroScene {
+    opacity: 0.4;
   }
 
-  .hTitle {
-    font-size: 88px;
-  }
-
-  .awards {
-    width: 60%;
-  }
-
-  .bubbleContainer {
+  .heroActions a {
     width: 100%;
-  }
-}
-
-@media (max-width: 1280px) {
-  .bg {
-    height: 50%;
-  }
-  .hTitle {
-    font-size: 72px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero {
-    flex-direction: column;
-  }
-
-  .bg {
-    height: 60%;
-  }
-
-  .hSection {
-    width: 100%;
-  }
-
-  .hSection.left {
-    align-items: center;
-    text-align: center;
-    gap: 36px;
-  }
-
-  .hTitle {
-    font-size: 72px;
-  }
-
-  .awards {
-    width: 100%;
-  }
-
-  .awardList {
-    justify-content: center;
-  }
-
-  .hSection.right{
-    justify-content: space-between;
-    align-items: start;
-  }
-
-  .bubbleContainer,
-  .certificate {
-    display: none;
   }
 }

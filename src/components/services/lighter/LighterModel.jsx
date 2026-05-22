@@ -7,7 +7,6 @@ Source: https://sketchfab.com/3d-models/zippo-lighter-4096px2-9a9cdaf66429455d8d
 Title: Zippo Lighter - 4096px²
 */
 
-import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function LighterModel(props) {

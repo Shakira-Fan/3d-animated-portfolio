@@ -7,7 +7,6 @@ Source: https://sketchfab.com/3d-models/skateboard-globe-down-in-flames-8dd79c78
 Title: Skateboard [ Globe: DOWN IN FLAMES ]
 */
 
-import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function SkateboardModel(props) {

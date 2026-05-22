@@ -1,114 +1,96 @@
-import ComputerModelContainer from "./computer/ComputerModelContainer";
-import LighterModelContainer from "./lighter/LIghterModelContainer";
+import { useState } from "react";
+import { motion } from "motion/react";
+import { surfaces } from "../../content";
+import LighterModelContainer from "./lighter/LighterModelContainer";
+import SkatiedModelContainer from "./skatie/SkatieModelContainer";
+import TShirtModelContainer from "./tShirt/TShirtModelContainer";
 import "./services.css";
-import Counter from "./Counter";
-import SkatieModelContainer from "./skatie/SkatieModelContainer";
-import { useRef, useState } from "react";
-import { motion, useInView } from "motion/react";
 
-const textVariants = {
-  initial: {
-    x: -100,
-    y: -100,
-    opacity: 0,
-  },
-  animate: {
-    x: 0,
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 1,
-    },
-  },
-};
-
-const listVariants = {
-  initial: {
-    x: -100,
-    opacity: 0,
-  },
-  animate: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      duration: 1,
-      staggerChildren: 0.5,
-    },
-  },
-};
-
-const services = [
+const objectTabs = [
   {
-    id: 1,
-    img: "/service1.png",
-    title: "Web Development",
-    counter: 35,
+    id: "skateboard",
+    label: "Skateboard",
+    title: "Deck graphics",
+    text: "Long compositions, stickers, tags, and character fragments feel natural on a board.",
+    Model: SkatiedModelContainer,
   },
   {
-    id: 2,
-    img: "/service2.png",
-    title: "Product Design",
-    counter: 23,
+    id: "shirt",
+    label: "T-shirt",
+    title: "Wearable prints",
+    text: "The poster-like pieces can become front graphics, back prints, or limited drops.",
+    Model: TShirtModelContainer,
   },
   {
-    id: 3,
-    img: "/service3.png",
-    title: "Branding",
-    counter: 46,
+    id: "lighter",
+    label: "Lighter",
+    title: "Pocket object",
+    text: "Small objects work as collectible studies for logos, tags, and cropped faces.",
+    Model: LighterModelContainer,
   },
 ];
 
 const Services = () => {
-  const [currentServiceId, setCurrentServiceId] = useState(1);
-  const ref = useRef();
-  const isInView = useInView(ref, { margin: "-200px" });
+  const [activeObject, setActiveObject] = useState(objectTabs[0]);
+  const ActiveModel = activeObject.Model;
+
   return (
-    <div className="services" ref={ref}>
-      <div className="sSection left">
-        <motion.h1
-          variants={textVariants}
-          animate={isInView ? "animate" : "initial"}
-          className="sTitle"
-        >
-          How do I help?
-        </motion.h1>
-        <motion.div
-          variants={listVariants}
-          animate={isInView ? "animate" : "initial"}
-          className="serviceList"
-        >
-          {services.map((service) => (
-            <motion.div
-              variants={listVariants}
-              className="service"
-              key={service.id}
-              onClick={() => setCurrentServiceId(service.id)}
-            >
-              <div className="serviceIcon">
-                <img src={service.img} alt="" />
-              </div>
-              <div className="serviceInfo">
-                <h2>{service.title}</h2>
-                <h3>{service.counter} Projects</h3>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-        <div className="counterList">
-          <Counter from={0} to={104} text="Projects Completed" />
-          <Counter from={0} to={72} text="Happy Clients" />
+    <section className="surfaces" id="objects">
+      <div className="section-inner surfacesIntro">
+        <div>
+          <p className="eyebrow">Surface system</p>
+          <h2 className="spray-title">
+            From wall to <span className="marker">thing.</span>
+          </h2>
+        </div>
+        <p>
+          The site is rebuilt around where the art actually belongs: painted
+          walls, clothes, decks, and small objects. The 3D area makes those
+          surfaces feel tangible.
+        </p>
+      </div>
+
+      <div className="section-inner surfaceGrid">
+        {surfaces.map((surface, index) => (
+          <motion.article
+            className="surfaceCard"
+            key={surface.id}
+            initial={{ y: 32, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ delay: index * 0.08, duration: 0.55 }}
+          >
+            <span>{surface.label}</span>
+            <h3>{surface.title}</h3>
+            <p>{surface.copy}</p>
+          </motion.article>
+        ))}
+      </div>
+
+      <div className="section-inner objectLab">
+        <div className="objectCopy">
+          <p className="eyebrow">3D object lab</p>
+          <h2>{activeObject.title}</h2>
+          <p>{activeObject.text}</p>
+          <div className="objectTabs" role="tablist" aria-label="3D object type">
+            {objectTabs.map((tab) => (
+              <button
+                className={tab.id === activeObject.id ? "active" : ""}
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveObject(tab)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="modelStage">
+          <ActiveModel />
         </div>
       </div>
-      <div className="sSection right">
-        {currentServiceId === 1 ? (
-          <ComputerModelContainer />
-        ) : currentServiceId === 2 ? (
-          <SkatieModelContainer />
-        ) : (
-          <LighterModelContainer />
-        )}
-      </div>
-    </div>
+    </section>
   );
 };
 

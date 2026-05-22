@@ -7,7 +7,6 @@ Source: https://sketchfab.com/3d-models/macbook-pro-2021-37763335f74b497e9190698
 Title: MacBook Pro 2021
 */
 
-import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function ComputerModel(props) {

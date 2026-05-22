@@ -7,7 +7,6 @@ Source: https://sketchfab.com/3d-models/skatie-ae3181c81cf34876b187b353291a2f96
 Title: Skatie
 */
 
-import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function SkatieModel(props) {
